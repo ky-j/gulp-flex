@@ -5,8 +5,7 @@
 0. 使用 `npm i -g gulp` 全局安装 gulp
 0. 进入 source 子文件夹，使用 `npm init` 生成 package.json
 0. 在项目中使用 `npm i -D gulp` 安装 gulp 到项目依赖中
-0. 在项目中使用 `npm i -D gulp-sass` 安装 gulp-sass 到项目依赖中
-0. 在项目中使用 `npm i -D gulp-autoprefixer` 安装 gulp-autoprefixer 到项目依赖中
+0. 在项目中使用 `npm i -D gulp-xxx` 安装 gulp-xxx 到项目依赖中（sass,autoprefixer,wrap）
 0. 新建 gulpfile.js，撰写任务（sass，拷贝，autoprefixer）
 0. 撰写监控任务（watch），以便自动化处理
 
@@ -22,13 +21,15 @@
 # 常用 gulp 插件
 - gulp-sass：sass 编译
 - gulp-autoprefixer：添加厂商前缀
+- gulp-wrap：包裹页面公告部分
+- browser-sync：同步刷新，[官方文档](https://browsersync.io/docs/gulp)
 - gulp-clean-css：css 文件压缩
 - gulp-imagemin：图片压缩
 - gulp-htmlmin： html 文件压缩
 - gulp-uglify： js 文件压缩
 - gulp-concat：文件合并
-- gulp-livereload
 - gulp-rename：文件重命名
+
 
 # Material Design
 色盘：[Material Palette](https://www.materialpalette.com/)
@@ -74,13 +75,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ```
 
+# Flex
+### 作用于 flex container（父级元素）
+- flex-direction
+- flex-wrap
+- justify-content
+- align-items
+
+### 作用于 flex item（子级元素）
+- flex-grow：弹性盒的扩展比例（默认为 0）
+- flex-shrink：弹性盒的收缩比例（默认为 1）
+- flex-basis
 
 # 技巧
 - 副标题跟标题的颜色相同，但是设置 .97 的透明度
+- 用 handleError 处理 gulp sass 出错后自动关闭的问题
+
+```javascript
+function handleError(err) {
+  console.log(err.toString());
+  this.emit('end');
+}
+gulp.task('sass', function () {
+    return gulp.src('src/style/main.scss')
+        .pipe(sass()).on('error', handleError)
+...
+});
+```
 
 # 问题
 - 如何删除一个项目模块？
-- gh-pages 分支是什么意思
+- gh-pages 分支是什么意思？
+
+# 额外收获
+- vh 高度单位的概念
+- 字体抗锯齿的 css 写法
+- box-sizing: border-box;
 
 # 其他
 
